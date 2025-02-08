@@ -10,9 +10,8 @@ RUN apk update && apk add --no-cache \
   && rm -rf /var/cache/apk/*
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
 COPY . .
+RUN npm ci
 RUN npm run build
 
 EXPOSE 3000
