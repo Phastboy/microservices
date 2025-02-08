@@ -1,17 +1,22 @@
 FROM node:lts-alpine
 
-# Set environment variable
-ENV NODE_ENV=production
-
-# Install OpenSSL (libressl) and required dependencies
+# Install build tools and python (required for some node modules)
 RUN apk update && apk add --no-cache \
-  openssl \
-  libressl \
-  && rm -rf /var/cache/apk/*
+    openssl \
+    libressl \
+    build-base \
+    python3
 
 WORKDIR /app
+COPY package*.json ./
+
+# Install dependencies including devDependencies
+RUN npm ci --include=dev
+
 COPY . .
-RUN npm ci
 RUN npm run build
+
+# Remove development dependencies for production
+RUN npm prune --production
 
 CMD ["npm", "run", "start:prod"]
