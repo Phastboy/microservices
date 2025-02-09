@@ -34,16 +34,6 @@ export class AppService {
         return user;
     }
 
-    update(id: string, userInput: Partial<User>): User {
-        const userIndex = this.users.findIndex((user) => user.id === id);
-        if (userIndex === -1) {
-            throw new Error(`User with id ${id} not found`);
-        }
-        const updatedUser = { ...this.users[userIndex], ...userInput };
-        this.users[userIndex] = updatedUser;
-        return updatedUser;
-    }
-
     delete(id: string): void {
         const userIndex = this.users.findIndex((user) => user.id === id);
         if (userIndex === -1) {

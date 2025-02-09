@@ -1,13 +1,15 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Logger } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
     constructor(private service: AppService) {}
+    private logger = new Logger(AppController.name);
 
     @MessagePattern('find_all_users')
     findAll() {
+        this.logger.log('request to fetch all users received from the client');
         return this.service.findAll();
     }
 
@@ -19,11 +21,6 @@ export class AppController {
     @MessagePattern('create_user')
     create(data: { name: string; age: number }) {
         return this.service.create(data);
-    }
-
-    @MessagePattern('update_user')
-    update(data: { id: string; name?: string; age?: number }) {
-        return this.service.update(data.id, data);
     }
 
     @MessagePattern('delete_user')

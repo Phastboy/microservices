@@ -18,13 +18,6 @@ export class UsersService {
         return this.client.send('find_one_user', id).toPromise();
     }
 
-    async update(id: string, updateUserInput: UpdateUserInput) {
-        const { id: _, ...updateData } = updateUserInput;
-        return this.client
-            .send('update_user', { id, ...updateData })
-            .toPromise();
-    }
-
     async remove(id: string) {
         return this.client.send('delete_user', id).toPromise();
     }

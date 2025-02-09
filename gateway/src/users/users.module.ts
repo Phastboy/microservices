@@ -7,7 +7,7 @@ import { RmqClientModule } from '../rmq-client/rmq-client.module';
     imports: [
         RmqClientModule.forRootAsync({
             name: 'USER_SERVICE',
-            queue: 'users_queue',
+            queue: 'user_queue',
         }),
     ],
     providers: [UsersResolver, UsersService],
