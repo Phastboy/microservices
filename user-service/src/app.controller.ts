@@ -23,11 +23,6 @@ export class AppController {
         return this.service.create(data);
     }
 
-    @MessagePattern('update_user')
-    update(data: { id: string; name?: string; age?: number }) {
-        return this.service.update(data.id, data);
-    }
-
     @MessagePattern('delete_user')
     delete(id: string) {
         return this.service.delete(id);
