@@ -25,8 +25,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies and build
+      - name: gateway; Install dependencies and build
         run: |
           cd gateway
+          npm ci
+          npm run build
+
+      - name: user-service; Install dependencies and build
+        run: |
+          cd user-service
           npm ci
           npm run build
