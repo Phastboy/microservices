@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 export class AppController {
     constructor(private service: AppService) {}
 
-    @MessagePattern('find_all_user')
+    @MessagePattern('find_all_users')
     findAll() {
         return this.service.findAll();
     }
