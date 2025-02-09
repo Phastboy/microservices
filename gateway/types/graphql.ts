@@ -9,22 +9,26 @@
 /* eslint-disable */
 
 export interface CreateUserInput {
-    id: string;
     name: string;
+    age: number;
 }
 
 export interface UpdateUserInput {
     id: string;
+    name?: Nullable<string>;
+    age?: Nullable<number>;
 }
 
 export interface User {
     id: string;
     name: string;
+    age: number;
 }
 
 export interface IQuery {
     users(): Nullable<User>[] | Promise<Nullable<User>[]>;
     user(id: string): Nullable<User> | Promise<Nullable<User>>;
+    findUsersByAge(age: number): Nullable<User>[] | Promise<Nullable<User>[]>;
 }
 
 export interface IMutation {

@@ -1,25 +1,35 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { CreateUserInput, UpdateUserInput } from '../../types/graphql';
 
 @Injectable()
 export class UsersService {
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
-  }
+    constructor(@Inject('USER_SERVICE') private readonly client: ClientProxy) {}
 
-  findAll() {
-    return `This action returns all users`;
-  }
+    async create(createUserInput: Omit<CreateUserInput, 'id'>) {
+        return this.client.send('create_user', createUserInput).toPromise();
+    }
 
-  findOne(id: string) {
-    return `This action returns a #${id} user`;
-  }
+    async findAll() {
+        return this.client.send('find_all_users', {}).toPromise();
+    }
 
-  update(id: string, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
-  }
+    async findOne(id: string) {
+        return this.client.send('find_one_user', id).toPromise();
+    }
 
-  remove(id: string) {
-    return `This action removes a #${id} user`;
-  }
+    async update(id: string, updateUserInput: UpdateUserInput) {
+        const { id: _, ...updateData } = updateUserInput;
+        return this.client
+            .send('update_user', { id, ...updateData })
+            .toPromise();
+    }
+
+    async remove(id: string) {
+        return this.client.send('delete_user', id).toPromise();
+    }
+
+    async findByAge(age: number) {
+        return this.client.send('find_users_by_age', age).toPromise();
+    }
 }
