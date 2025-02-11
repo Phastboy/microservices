@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 
 @Module({
-    imports: [GraphqlModule, ConfigModule.forRoot(), UsersModule],
-    providers: [],
+  imports: [GraphqlModule, ConfigModule.forRoot(), UsersModule],
+  providers: [],
 })
 export class AppModule {}
