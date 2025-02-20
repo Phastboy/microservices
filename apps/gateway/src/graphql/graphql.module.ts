@@ -9,7 +9,7 @@ import { join } from 'path';
       driver: ApolloDriver,
       typePaths: ['./**/*.graphql'],
       definitions: {
-        path: join(process.cwd(), '@/apps/gateway/src/graphql/graphql.ts'),
+        path: join(process.cwd(), './apps/gateway/src/graphql/graphql.ts'),
       },
     }),
   ],
