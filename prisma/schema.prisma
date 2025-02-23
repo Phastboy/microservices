@@ -13,6 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator markdown {
+  provider = "prisma-markdown"
+  output   = "./ERD.md"
+  title    = "Social media"
+}
+
 model User {
   id    Int     @default(autoincrement()) @id
   email String  @unique
