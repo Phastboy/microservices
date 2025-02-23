@@ -9,7 +9,7 @@ async function bootstrap() {
       transport: Transport.RMQ,
       options: {
         urls: [process.env.RABBITMQ_URL || 'amqp://localhost:5672'],
-        queue: 'user_queue',
+        queue: 'users_queue',
         queueOptions: { durable: false },
       },
     },
